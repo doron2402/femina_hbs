@@ -151,7 +151,7 @@ li.answer{
     background-repeat: no-repeat;
     display: inline-block;
     height: 48px;
-    margin-top: 213px;
+    margin-top: 225px;
     margin-right:-8px;
     width: 86px;
 }
@@ -278,5 +278,10 @@ li.answer{
     margin-right: 30px;
     margin-top: 37px;
 }
-
+#Question-Page-Question-Number{
+    color: #DA4AAB;
+    margin-right: 462px;
+    margin-top: 20px;
+    position: absolute;
+}
 

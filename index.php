@@ -115,6 +115,7 @@ $currentJson = file_get_contents('data.json');
     <div id="Header-Text" style="background: url('src/img/coteret.png'); width: 371px; height:119px;margin-right: 300px;margin-top: 50px; position:absolute;" />
     
     <div id="Main-Answers">
+        <div id="Question-Page-Question-Number">שאלה {{question_number}} מתוך 9</div>
         <div id="Main-Question">{{question}}</div>
         {{#list answers}} {{answer}} {{/list}}
     </div>
@@ -124,7 +125,6 @@ $currentJson = file_get_contents('data.json');
     <div onClick="getTakanon();" class="takanon-button btn-click"></div>
 </script>
 <!-- END OF: Question Template -->
-
 
 <script id="Contact-Final-Page-HBS" type="text/x-handlebars-template">
     <div id="Contact-Final-Container">
