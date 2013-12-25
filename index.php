@@ -151,7 +151,10 @@ $currentJson = file_get_contents('data.json');
 
 <script id="Result-Page-HBS" type="text/x-handlebars-template">
     <div id="Result-Page-Header"></div>
-    <div id="Result-Main-Container"></div>    
+    <div id="Result-Main-Container">
+        <div id="Result-Main-Container-Header">{{result_header}}</div>
+        <div id="Result-Main-Container-Text"><p>{{result_text}}</p></div>
+    </div>    
     <div id="Woman-Left"></div>
     <div id="Footer-Start" style="margin-right: 50px;margin-top: 510px;position: absolute;">
         <a class="footer-btn about-button" onClick="getAboutPage();" href="#About"></a>

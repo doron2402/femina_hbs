@@ -259,3 +259,24 @@ li.answer{
     position: absolute;
     width: 538px;
 }
+#Result-Main-Container-Header{
+    color: #411564;
+    font-family: sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+    margin-right: 30px;
+    margin-top: 37px;
+}
+#Result-Main-Container-Text{
+    width:550px;
+}
+#Result-Main-Container-Text p{
+     color: #411564;
+    font-family: sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 30px;
+    margin-top: 37px;
+}
+
+

@@ -211,7 +211,7 @@ var getResultPage = function getResultPage(){
 
     var source   = $("#Result-Page-HBS").html();
     var template = Handlebars.compile(source);
-    var context  = {};
+    var context  = {result_text: "מחוברת מחוברת מחוברת! את יודעת ליהנות מהחיים....את פשוט לא מכירה שום דרך אחרת! תמשיכי כך, אבל........... אל תשכחי לשמור על עצמך ותזכרי תמיד לשמור על הבריאות האינטימית שלך כדי שתוכלי להמשיך לכבוש את העולם ובהצלחה!", result_header: 'מחוברת מדי!'};
     var html    = template(context);
     $('#Question-Page').html(html);
 }
