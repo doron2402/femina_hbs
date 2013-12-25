@@ -44,8 +44,45 @@ $currentJson = file_get_contents('data.json');
     <!--[if lt IE 9]>
     	<script src="./src/lib/html5shiv.js"></script>
     <![endif]-->
+    <style>
+    .coupon-button
+    {
+        background: url('./src/img/coupon_button.png');
+    }
+    .about-button{
+        background: url('./src/img/odot_button.png');
+    }
+    .footer-btn{
+        width: 206px;
+        height: 39px;
+        display: inline-block;
+        cursor: pointer;
+    }
+    #Main-Answers{
+           background: url("./src/img/white_BG.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+            height: 262px;
+            margin-right: 200px;
+            margin-top: 220px;
+            position: absolute;
+            width: 577px;
+    }
+    #Answers-Container{
+        margin-right: 80px;
+        margin-top: 60px;
+        position: absolute;
+
+    }
+    #Main-Question{
+        margin-right: 55px;
+        margin-top: 30px;
+        position: absolute;
+    }
+    </style>
 	<script type="text/javascript">
 		var DataObj = $.parseJSON('<?= $currentJson ?>');
+        var main_url = location.pathname.split('/');
+        main_url.pop();
+        main_url = location.origin + main_url.join('/');
 
 	  var _gaq = _gaq || [];
 	  _gaq.push(['_setAccount', 'UA-46087404-1']);
@@ -72,39 +109,88 @@ $currentJson = file_get_contents('data.json');
     </script>
     <div id="Main-Container">
         <div id="Starting-Page"></div>
-        
-            
-        <script id="Page1" type="text/x-handlebars-template">
-           
-             <div id="Footer-Question"></div>
-        </script>
 
+        <div id="Question-Page"></div>
+        
     </div><!-- eo Main-Container -->
 
  <script id="Starting-Page-HBS" type="text/x-handlebars-template">
-    <div class="entry">
-        <div id="Woman-Left" style="margin-right: 719px;margin-top: 57px;position: absolute;">
-            <img src="{{woman_left_img_link}}" />
+        <div id="Woman-Left" style="background: url('src/img/woman+product.png'); width:288px; height:494px; margin-right: 719px;margin-top: 57px;position: absolute;"></div>
+
+        <div id="Ready-Button" style="background: url('src/img/ready_button.png'); width:287px; height:79px; position: absolute;margin-right: 280px;margin-top: 325px;cursor:pointer;"></div>
+
+        <div id="Main-Text" style="background:url('src/img/main_txt.png'); width:564px; height:278px; position: absolute;margin-top: 35px;margin-right: 140px"></div>
+     
+        <div id="Footer-Start" style="position: absolute;margin-top: 450px;margin-right: 100px;">
+            <a href="#Coupon" class="footer-btn coupon-button"></a>
+            <a href="#About" class="footer-btn about-button"></a>
         </div>
-              <h1>{{title}}</h1>
-              <div class="body">
-                {{{body}}}
-              </div>
-            </div>
-            <div id="Footer-Start"></div>
+
+        <div id="Share-Button" style="">
+            <a href="Share">Share</a>
+        </div>
 </script>
 
+<script id="Question-Page-HBS" type="text/x-handlebars-template">
+    <div id="Header-Text" style="background: url('src/img/coteret.png'); width: 371px; height:119px;margin-right: 300px;margin-top: 50px; position:absolute;" />
+    
+    <div id="Main-Answers">
+        <div id="Main-Question">{{question}}</div>
+        {{#list answers}} {{answer}} {{/list}}
+    </div>
+</script>
 
 <script type="text/javascript">
-    
+    Handlebars.registerHelper('list', function(items, options) {
+      var out = "<ul id=\"Answers-Container\">";
+
+      for(var i=0, l=items.length; i<l; i++) {
+        out = out + "<li class=\"answer\" id=\"answer-" + i + "\"><img src=\"./src/img/" + (i+1) + ".png\"/>" + options.fn(items[i]) + "</li>";
+      }
+
+      return out + "</ul>";
+    });
+
     $(document).ready(function(){
         //Generate Start Page
         var source   = $("#Starting-Page-HBS").html();
         var template = Handlebars.compile(source);
-        var context = {woman_left_img_link: '/' + location.pathname.split('/')[1] + '/src/img/woman+product.png' ,title: "My New Post", body: "This is my first post!"};
+        var context = {};
         var html    = template(context);
         $('#Starting-Page').html(html);
+        $('#Ready-Button').click(function(e){
+            e.preventDefault();
+            console.log('Ready');
+            generateQuestionPage(1);
+        });
+
     });
+
+    var generateQuestionPage = function generateQuestionPage(num){
+        num = parseInt(num, 10);
+        var source   = $("#Question-Page-HBS").html();
+        var template = Handlebars.compile(source);
+        
+        switch(num)
+        {
+            case 1:
+                $('#Starting-Page').hide();
+                var context = {question: 'this is question', question_number: '1', answers: [ {answer:'answer 1', number: 1}, {answer:'answer 2', number: 2} ,  {answer:'answer 3', number: 3} ], next: 2};
+                var html    = template(context);
+                break;
+            case 2:
+                $('#Starting-Page').hide();
+                var context = {question: 'this is question', question_number: '1', answers: [ {answer:'answer 1', number: 1}, {answer:'answer 2', number: 2} ,  {answer:'answer 3', number: 3} ], next: 2};
+                var html    = template(context);
+                break;
+            defualt:
+                var context = {question: 'this is question', question_number: '1', answers: [ {answer:'answer 1', number: 1}, {answer:'answer 2', number: 2} ,  {answer:'answer 3', number: 3} ], next: 2};
+                var html    = template(context);
+                break;
+        }
+
+        $('#Question-Page').html(html);
+    }
 </script>
 
 </body>
