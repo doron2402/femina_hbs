@@ -45,41 +45,7 @@ $currentJson = file_get_contents('data.json');
     	<script src="./src/lib/html5shiv.js"></script>
     <![endif]-->
     <style>
-    .coupon-button
-    {
-        background: url('./src/img/coupon_button.png');
-    }
-    .about-button{
-        background: url('./src/img/odot_button.png');
-    }
-    .footer-btn{
-        width: 206px;
-        height: 39px;
-        display: inline-block;
-        cursor: pointer;
-    }
-    #Main-Answers{
-           background: url("./src/img/white_BG.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
-            height: 262px;
-            margin-right: 200px;
-            margin-top: 220px;
-            position: absolute;
-            width: 577px;
-    }
-    #Answers-Container{
-        margin-right: 80px;
-        margin-top: 60px;
-        position: absolute;
-
-    }
-    #Main-Question{
-        margin-right: 55px;
-        margin-top: 30px;
-        position: absolute;
-    }
-    li .answer{
-        cursor: pointer;
-    }
+    
     </style>
 	<script type="text/javascript">
 		var DataObj = $.parseJSON('<?= $currentJson ?>');
@@ -141,6 +107,20 @@ $currentJson = file_get_contents('data.json');
         <div id="Main-Question">{{question}}</div>
         {{#list answers}} {{answer}} {{/list}}
     </div>
+</script>
+
+<script id="Contact-Final-Page-HBS" type="text/x-handlebars-template">
+    <div id="Contact-Final-Container">
+        <form>
+        </form>
+        <div id="Contact-Final-Submit"></div> 
+    </div>
+    <div id="Contact-Final-Footer">
+        <a href="#coupon" class="footer-btn coupon-button" />
+        <a href="#about" class="footer-btn about-button"  />
+        <a href="#result" class="footer-btn result-button" />
+    </div>
+
 </script>
 
 <script type="text/javascript">
@@ -214,6 +194,11 @@ $currentJson = file_get_contents('data.json');
                 var context = {question: 'this is question 9', question_number: '1', answers: [ {answer:'answer 1', number: 1, page: 9}, {answer:'answer 2', number: 2, page: 9} ,  {answer:'answer 3', number: 3, page: 9} ]};
                 var html    = template(context);
                 break;
+            case 10:
+                var source   = $("#Contact-Final-Page-HBS").html();
+                var template = Handlebars.compile(source);
+                var context  = {};
+                var html    = template(context);
             default:
                 var context = {question: 'this is question', question_number: '1', answers: [ {answer:'answer 1', number: 1}, {answer:'answer 2', number: 2} ,  {answer:'answer 3', number: 3} ]};
                 var html    = template(context);
