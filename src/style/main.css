@@ -64,67 +64,115 @@ button{
 }
 .coupon-button{
         background: url('../img/coupon_button.png');
-}
-    .about-button{
-        background: url('../img/odot_button.png');
-    }
-    .result-button{
-        background: url('../img/totzaot_button.png'); 
-    }
-    .footer-btn{
-        width: 206px;
-        height: 39px;
-        display: inline-block;
-        cursor: pointer;
-    }
-    #Main-Answers{
-           background: url("../img/white_BG.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
-            height: 262px;
-            margin-right: 200px;
-            margin-top: 220px;
-            position: absolute;
-            width: 577px;
-    }
-    #Answers-Container{
-        margin-right: 80px;
-        margin-top: 60px;
-        position: absolute;
-
-    }
-    #Main-Question{
-        margin-right: 55px;
-        margin-top: 30px;
-        position: absolute;
-    }
-    li .answer{
-        cursor: pointer;
-    }
-    #Contact-Final-Container: {
-        background: url("../img/questions_box.png");
         background-repeat: no-repeat;
-        width: 577px;
-        height: 262px;
-        position: absolute;
-    }
-    #Contact-Final-Submit{
-        background: url("../img/finnish+send_button.png");
-        width: 271px;
-        height: 45px;
-        position: absolute;
-        margin-top: 400px;
-        margin-right: 350px;
-        cursor: pointer;
-    }
-    #Contact-Final-Footer{
-        position: absolute;
-        margin-top: 500px;
-        margin-right: 200px;
-    }
+}
+.about-button{
+    background: url('../img/odot_button.png');
+    background-repeat: no-repeat;
+}
+.result-button{
+    background: url('../img/totzaot_button.png'); background-repeat: no-repeat;
+}
+.rest-result-button{
+    background: url("../img/ma_anu_button.png") repeat scroll 0 0 rgba(0, 0, 0, 0)
+}
+.footer-btn{
+    width: 206px;
+    height: 39px;
+    display: inline-block;
+    cursor: pointer;
+}
+#Main-Answers{
+    background: url("../img/white_BG.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background-repeat: no-repeat;
+    height: 262px;
+    margin-right: 200px;
+    margin-top: 220px;
+    position: absolute;
+    width: 577px;
+}
+#Answers-Container{
+    margin-right: 80px;
+    margin-top: 60px;
+    position: absolute;
+}
+#Main-Question{
+    margin-right: 55px;
+    margin-top: 30px;
+    position: absolute;
+}
+li .answer{
+    cursor: pointer;
+}
+#Contact-Final-Container: {
+    background: url("../img/questions_box.png");
+    background-repeat: no-repeat;
+    width: 577px;
+    height: 262px;
+    position: absolute;
+}
+#Contact-Final-Submit{
+    background: url("../img/finnish+send_button.png");
+    background-repeat: no-repeat;
+    width: 271px;
+    height: 45px;
+    position: absolute;
+    margin-right: 250px;
+    margin-top: 50px;
+    cursor: pointer;
+}
+#Contact-Final-Footer{
+    position: absolute;
+    margin-top: 500px;
+    margin-right: 200px;
+}
 #Main-Answers-Meter{
     background: url("../img/mad_intimiut.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background-repeat: no-repeat;
     height: 262px;
     margin-right: 800px;
     margin-top: 219px;
     position: absolute;
-    width: 201px; 
+    width: 201px;
+}
+#Meter-Arrow{
+    background: url("../img/mad_arrow.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 48px;
+    margin-top: 213px;
+    margin-right:-8px;
+    width: 86px;
+}
+.contact-form-input{
+    float:left;
+}
+#Result-Main-Container{
+    background: url("../img/totsaot_box.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background-repeat: no-repeat;
+    height: 292px;
+    position: absolute;
+    width: 609px;
+    margin-right: 70px;
+    margin-top: 190px;
+}
+#Woman-Left{
+    background: url('src/img/woman+product.png'); 
+    background-repeat: no-repeat;
+    width:288px; 
+    height:494px; 
+    margin-right: 719px;
+    margin-top: 57px;
+    position: absolute;
+}
+#Contact-Final-Container{width:600px;margin-top:300px;position:absolute;margin-right:100px;}
+.takanon-button{
+    background: url("../img/takanon.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    cursor: pointer;
+    display: inline-block;
+    height: 14px;
+    position: absolute;
+    width: 54px;
+    margin-right: 940px;
+    margin-top: 530px;
 }

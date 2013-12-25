@@ -34,6 +34,7 @@ $currentJson = file_get_contents('data.json');
     <script type="text/javascript" src="./src/lib/jquery.fancybox.pack.js"></script>
     <script type="text/javascript" src="./src/lib/handlebars-v1.2.0.js
 "></script>
+    <script type="text/javascript" src="./src/js/app.js"></script>
     <meta property="og:image" content="http://cmp.interactivated.co.il/McCann/Altman/2013/Seker/src/img/woman+product.png"/>
     <meta property="og:title" content="גם אני השתתפתי בסקר הנשים הגדול של אלטמן" />
     <meta property="og:description" content="היכנסי גם את, מלאי את הסקר וגלי עד כמה את באמת מחוברת לעצמך. ובנוסף – תוכלי לזכות ביום ספא מפנק עם חברה!" />
@@ -63,8 +64,6 @@ $currentJson = file_get_contents('data.json');
 	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	  })();
 	</script>
-
-
 </head>
 <body>
 	<div id="fb-root"></div>
@@ -83,6 +82,8 @@ $currentJson = file_get_contents('data.json');
         
     </div><!-- eo Main-Container -->
 
+
+<!-- STARTING PAGE TEMPLATE -->
  <script id="Starting-Page-HBS" type="text/x-handlebars-template">
         <div id="Woman-Left" style="background: url('src/img/woman+product.png'); width:288px; height:494px; margin-right: 719px;margin-top: 57px;position: absolute;"></div>
 
@@ -98,8 +99,11 @@ $currentJson = file_get_contents('data.json');
         <div id="Share-Button" style="">
             <a href="Share">Share</a>
         </div>
+        <div class="takanon-button btn-click"></div>
 </script>
+<!-- END OF: STARTING PAGE TEMPLATE -->
 
+<!-- Question Template -->
 <script id="Question-Page-HBS" type="text/x-handlebars-template">
     <div id="Header-Text" style="background: url('src/img/coteret.png'); width: 371px; height:119px;margin-right: 300px;margin-top: 50px; position:absolute;" />
     
@@ -108,29 +112,46 @@ $currentJson = file_get_contents('data.json');
         {{#list answers}} {{answer}} {{/list}}
     </div>
     <div id="Main-Answers-Meter">
-    
+        <div id="Meter-Arrow"></div>
     </div>
+    <div class="takanon-button btn-click"></div>
 </script>
+<!-- END OF: Question Template -->
+
 
 <script id="Contact-Final-Page-HBS" type="text/x-handlebars-template">
     <div id="Contact-Final-Container">
         <form>
+            <textarea></textarea>
+            <input class="contact-form-input" type="text" name="name" />
+            <input class="contact-form-input" type="text" name="phone" />
+            <input class="contact-form-input" type="text" name="email" />
+            <input type="checkbox" name="agree" />
         </form>
-        <div id="Contact-Final-Submit"></div> 
+        <div onClick="contactForm()" id="Contact-Final-Submit"></div> 
     </div>
     <div id="Contact-Final-Footer">
         <a href="#coupon" class="footer-btn coupon-button" />
         <a href="#about" class="footer-btn about-button"  />
         <a href="#result" class="footer-btn result-button" />
     </div>
+    <div class="takanon-button btn-click"></div>
+</script>
 
+<script id="Result-Page-HBS" type="text/x-handlebars-template">
+    <div id="Result-Main-Container"></div>    
+    <div id="Woman-Left"></div>
+    <div id="Footer-Start" style="margin-right: 50px;margin-top: 510px;position: absolute;">
+        <a class="footer-btn about-button" href="#About"></a>
+        <a class="footer-btn rest-result-button" href="#rest"></a>
+        <a class="footer-btn coupon-button" href="#Coupon"></a>
+    </div>
+    <div class="takanon-button btn-click"></div>
 </script>
 
 <script type="text/javascript">
     Handlebars.registerHelper('list', function(items, options) {
       var out = "<ul id=\"Answers-Container\">";
-      console.log(options);
-      console.log(items);
 
       for(var i=0, l=items.length; i<l; i++) {
         out = out + "<li onClick=\"addAnswerEvent(" + items[i].page + "," + (i+1) + ")\" class=\"answer answer-group-" + items[i].page + "\" id=\"answer-" + i + "\"><img src=\"./src/img/" + (i+1) + ".png\"/>" + options.fn(items[i]) + "</li>";
@@ -148,77 +169,39 @@ $currentJson = file_get_contents('data.json');
         $('#Starting-Page').html(html);
         $('#Ready-Button').click(function(e){
             e.preventDefault();
+            _gaq.push(['_trackEvent', 'Femina_ Survey', 'start_surey']);
             generateQuestionPage(1);
         });
 
     });
 
-    var generateQuestionPage = function generateQuestionPage(num){
-        num = parseInt(num, 10);
-        var source   = $("#Question-Page-HBS").html();
-        var template = Handlebars.compile(source);
-        console.log('generating page %s', num);
-        switch(num)
-        {
-            case 1:
-                $('#Starting-Page').hide();
-                var context = {question: 'this is question1', question_number: '1', answers: [ {answer:'answer 1', number: 1, page: 1}, {answer:'answer 2', number: 2, page: 1} ,  {answer:'answer 3', number: 3, page: 1} ]};
-                var html    = template(context);
-                break;
-            case 2:
-                var context = {question: 'this is question 2222', question_number: '1', answers: [ {answer:'answer 1', number: 1, page: 2}, {answer:'answer 2', number: 2, page: 2} ,  {answer:'answer 3', number: 3, page: 2} ]};
-                var html    = template(context);
-                break;
-            case 3:
-                var context = {question: 'this is question 3', question_number: '1', answers: [ {answer:'answer 1', number: 1, page: 3}, {answer:'answer 2', number: 2, page: 3} ,  {answer:'answer 3', number: 3, page: 3} ]};
-                var html    = template(context);
-                break;
-            case 4:
-                var context = {question: 'this is question 4', question_number: '1', answers: [ {answer:'answer 1', number: 1, page: 4}, {answer:'answer 2', number: 2, page: 4} ,  {answer:'answer 3', number: 3, page: 4} ]};
-                var html    = template(context);
-                break;
-            case 5:
-                var context = {question: 'this is question 5', question_number: '1', answers: [ {answer:'answer 1', number: 1, page: 5}, {answer:'answer 2', number: 2, page: 5} ,  {answer:'answer 3', number: 3, page: 5} ]};
-                var html    = template(context);
-                break;
-            case 6:
-                var context = {question: 'this is question 6', question_number: '1', answers: [ {answer:'answer 1', number: 1, page:6}, {answer:'answer 2', number: 2, page: 6} ,  {answer:'answer 3', number: 3, page: 6} ]};
-                var html    = template(context);
-                break;
-            case 7:
-                var context = {question: 'this is question 7', question_number: '1', answers: [ {answer:'answer 1', number: 1, page: 7}, {answer:'answer 2', number: 2, page: 7} ,  {answer:'answer 3', number: 3, page: 7} ]};
-                var html    = template(context);
-                break;
-            case 8:
-                var context = {question: 'this is question 8', question_number: '1', answers: [ {answer:'answer 1', number: 1, page: 8}, {answer:'answer 2', number: 2, page: 8} ,  {answer:'answer 3', number: 3, page: 8} ]};
-                var html    = template(context);
-                break;
-            case 9:
-                var context = {question: 'this is question 9', question_number: '1', answers: [ {answer:'answer 1', number: 1, page: 9}, {answer:'answer 2', number: 2, page: 9} ,  {answer:'answer 3', number: 3, page: 9} ]};
-                var html    = template(context);
-                break;
-            case 10:
-                var source   = $("#Contact-Final-Page-HBS").html();
-                var template = Handlebars.compile(source);
-                var context  = {};
-                var html    = template(context);
-            default:
-                var context = {question: 'this is question', question_number: '1', answers: [ {answer:'answer 1', number: 1}, {answer:'answer 2', number: 2} ,  {answer:'answer 3', number: 3} ]};
-                var html    = template(context);
-                break;
-        }
 
-        $('#Question-Page').html(html);
-    }
+$(".about-button").fancybox({
+  padding: 0,
+  margin: 0,
+  hideOnContentClick: true,
+  titleShow: false,
+  showNavArrows: false,
+  afterLoad: function(){ _gaq.push(['_trackEvent', 'Femina_ Survey', 'about_femina_probiotics']); }
+});
 
-    var addAnswerEvent = function addAnswerEvent(page, ans){
-        console.log('addAnswerEvent');
-        
-        console.log('page: %s, answer: %s', page, ans);
-        page = page+1;
-        console.log(page);
-        generateQuestionPage(page);
-    }
+$(".coupon-button").fancybox({
+    scrolling: "no",
+    padding: 0,
+    margin: 0,
+    hideOnContentClick: true,
+    titleShow: false,
+    showNavArrows: false,
+    afterLoad: function(){ _gaq.push(['_trackEvent', 'Femina_ Survey', 'coupon']) }
+});
+
+$(".takanon-button").on("click",function(e){
+    console.log('takanon;;;;');
+    e.preventDefault();
+    _gaq.push(['_trackEvent', 'Femina_ Survey', 'takanon']);
+    window.open("./src/takanon.pdf");
+});
+
 </script>
 
 </body>
