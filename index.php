@@ -77,6 +77,9 @@ $currentJson = file_get_contents('data.json');
         margin-top: 30px;
         position: absolute;
     }
+    li .answer{
+        cursor: pointer;
+    }
     </style>
 	<script type="text/javascript">
 		var DataObj = $.parseJSON('<?= $currentJson ?>');
@@ -143,9 +146,11 @@ $currentJson = file_get_contents('data.json');
 <script type="text/javascript">
     Handlebars.registerHelper('list', function(items, options) {
       var out = "<ul id=\"Answers-Container\">";
+      console.log(options);
+      console.log(items);
 
       for(var i=0, l=items.length; i<l; i++) {
-        out = out + "<li class=\"answer\" id=\"answer-" + i + "\"><img src=\"./src/img/" + (i+1) + ".png\"/>" + options.fn(items[i]) + "</li>";
+        out = out + "<li onClick=\"addAnswerEvent(" + items[i].page + "," + (i+1) + ")\" class=\"answer answer-group-" + items[i].page + "\" id=\"answer-" + i + "\"><img src=\"./src/img/" + (i+1) + ".png\"/>" + options.fn(items[i]) + "</li>";
       }
 
       return out + "</ul>";
@@ -175,21 +180,34 @@ $currentJson = file_get_contents('data.json');
         {
             case 1:
                 $('#Starting-Page').hide();
-                var context = {question: 'this is question', question_number: '1', answers: [ {answer:'answer 1', number: 1}, {answer:'answer 2', number: 2} ,  {answer:'answer 3', number: 3} ], next: 2};
+                var context = {question: 'this is question1', question_number: '1', answers: [ {answer:'answer 1', number: 1, page: 1}, {answer:'answer 2', number: 2, page: 1} ,  {answer:'answer 3', number: 3, page: 1} ]};
                 var html    = template(context);
                 break;
             case 2:
                 $('#Starting-Page').hide();
-                var context = {question: 'this is question', question_number: '1', answers: [ {answer:'answer 1', number: 1}, {answer:'answer 2', number: 2} ,  {answer:'answer 3', number: 3} ], next: 2};
+                var context = {question: 'this is question2', question_number: '1', answers: [ {answer:'answer 1', number: 1, page: 1}, {answer:'answer 2', number: 2, page: 1} ,  {answer:'answer 3', number: 3, page: 1} ]};
                 var html    = template(context);
                 break;
-            defualt:
-                var context = {question: 'this is question', question_number: '1', answers: [ {answer:'answer 1', number: 1}, {answer:'answer 2', number: 2} ,  {answer:'answer 3', number: 3} ], next: 2};
+            case 3:
+                $('#Starting-Page').hide();
+                var context = {question: 'this is question3', question_number: '1', answers: [ {answer:'answer 1', number: 1, page: 1}, {answer:'answer 2', number: 2, page: 1} ,  {answer:'answer 3', number: 3, page: 1} ]};
+                var html    = template(context);
+                break;
+            default:
+                var context = {question: 'this is question', question_number: '1', answers: [ {answer:'answer 1', number: 1}, {answer:'answer 2', number: 2} ,  {answer:'answer 3', number: 3} ]};
                 var html    = template(context);
                 break;
         }
 
         $('#Question-Page').html(html);
+    }
+
+    var addAnswerEvent = function addAnswerEvent(page, ans){
+        console.log('addAnswerEvent');
+        
+        console.log('page: %s, answer: %s', page, ans);
+        page = page +1;
+        generateQuestionPage(page);
     }
 </script>
 
