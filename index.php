@@ -107,6 +107,9 @@ $currentJson = file_get_contents('data.json');
         <div id="Main-Question">{{question}}</div>
         {{#list answers}} {{answer}} {{/list}}
     </div>
+    <div id="Main-Answers-Meter">
+    
+    </div>
 </script>
 
 <script id="Contact-Final-Page-HBS" type="text/x-handlebars-template">
