@@ -86,30 +86,41 @@ button{
     background: url("../img/white_BG.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
     background-repeat: no-repeat;
     height: 262px;
-    margin-right: 200px;
-    margin-top: 220px;
+    margin-right: 120px;
+    margin-top: 200px;
     position: absolute;
     width: 577px;
 }
 #Answers-Container{
-    margin-right: 80px;
-    margin-top: 60px;
+    margin-right: 50px;
+    margin-top: 90px;
     position: absolute;
 }
 #Main-Question{
-    margin-right: 55px;
+    margin-right: 40px;
     margin-top: 30px;
     position: absolute;
+    color: #411564;
+    font-family: arial,sans-serif;
+    font-size: 20px;
+    font-weight: bold;
 }
-li .answer{
+li.answer{
     cursor: pointer;
+    color: #411564;
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    vertical-align: middle !important;
 }
-#Contact-Final-Container: {
-    background: url("../img/questions_box.png");
-    background-repeat: no-repeat;
-    width: 577px;
+#Contact-Final-Container {
+    background: url("../img/questions_box.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
     height: 262px;
+    margin-right: 205px;
+    margin-top: 160px;
+    padding-top: 100px;
     position: absolute;
+    width: 600px;
 }
 #Contact-Final-Submit{
     background: url("../img/finnish+send_button.png");
@@ -130,8 +141,8 @@ li .answer{
     background: url("../img/mad_intimiut.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
     background-repeat: no-repeat;
     height: 262px;
-    margin-right: 800px;
-    margin-top: 219px;
+    margin-right: 750px;
+    margin-top: 200px;
     position: absolute;
     width: 201px;
 }
@@ -157,7 +168,7 @@ li .answer{
     margin-top: 190px;
 }
 #Woman-Left{
-    background: url('src/img/woman+product.png'); 
+    background: url('../img/woman+product.png'); 
     background-repeat: no-repeat;
     width:288px; 
     height:494px; 
@@ -165,7 +176,6 @@ li .answer{
     margin-top: 57px;
     position: absolute;
 }
-#Contact-Final-Container{width:600px;margin-top:300px;position:absolute;margin-right:100px;}
 .takanon-button{
     background: url("../img/takanon.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
     cursor: pointer;
@@ -173,6 +183,79 @@ li .answer{
     height: 14px;
     position: absolute;
     width: 54px;
-    margin-right: 940px;
+    margin-right: 945px;
+    margin-top: 545px;
+}
+#Main-Total-Result{
+    background: url("../img/double_mad.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    height: 359px;
+    position: absolute;
+    width: 647px;
+    margin-right: 200px;
+    margin-top:100px;  
+    } 
+.meter-arrow-all{
+    background: url("../img/mad_all_girls.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    display: inline-block;
+    height: 70px;
+    position: absolute;
+    width: 277px;
+    margin-right: 30px;
+    margin-top: 256px;
+}
+
+.meter-arrow-single{
+    background: url("../img/mad_shelach.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    display: inline-block;
+    height: 70px;
+    position: absolute;
+    width: 277px;
+    margin-top:256px;
+    margin-right:250px;  
+}
+#Share-Button{
+    height: 20px;
+    margin-right: 40px;
     margin-top: 530px;
+    position: absolute;
+    width: 50px;
+}
+#Footer-Start{
+    margin-right: 205px;
+    margin-top: 490px;
+    position: absolute;
+}
+#Thank-You-Header{
+    background: url("../img/coteret.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    position: absolute;
+    height: 119px;
+    width: 371px;
+    margin-right:240px;
+    margin-top:60px;  
+}
+#Thank-You-Confirmation{ 
+    background: url("../img/toda.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    height: 52px;
+    margin-right: 400px;
+    margin-top: 250px;
+    position: absolute;
+    width: 216px;
+}
+#Thank-You-Show-Result{
+    background: url("../img/totzaot_button.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    cursor: pointer;
+    height: 39px;
+    margin-right: 400px;
+    margin-top: 100px;
+    position: absolute;
+    top: 280px;
+    width: 206px;
+}
+#Result-Page-Header{
+    background: url("../img/coteret_answer.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    height: 135px;
+    margin-right: 100px;
+    margin-top: 42px;
+    position: absolute;
+    width: 538px;
 }

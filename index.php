@@ -49,10 +49,17 @@ $currentJson = file_get_contents('data.json');
     
     </style>
 	<script type="text/javascript">
-		var DataObj = $.parseJSON('<?= $currentJson ?>');
-        var main_url = location.pathname.split('/');
+		window.Seker = window.Seker || {};
+
+        var DataObj = $.parseJSON('<?= $currentJson ?>'),
+        main_url = location.pathname.split('/');
         main_url.pop();
         main_url = location.origin + main_url.join('/');
+
+        Seker.Answer = [];
+        Seker.counter = 1;
+        Seker.result = 0;  //max is 330
+        Seker.AvgResult = DataObj.questions;
 
 	  var _gaq = _gaq || [];
 	  _gaq.push(['_setAccount', 'UA-46087404-1']);
@@ -91,15 +98,15 @@ $currentJson = file_get_contents('data.json');
 
         <div id="Main-Text" style="background:url('src/img/main_txt.png'); width:564px; height:278px; position: absolute;margin-top: 35px;margin-right: 140px"></div>
      
-        <div id="Footer-Start" style="position: absolute;margin-top: 450px;margin-right: 100px;">
-            <a href="#Coupon" class="footer-btn coupon-button"></a>
-            <a href="#About" class="footer-btn about-button"></a>
+        <div id="Footer-Start">
+            <a href="#Coupon" onClick="getCoupon();" class="footer-btn coupon-button"></a>
+            <a href="#About" onClick="getAboutPage();" class="footer-btn about-button"></a>
         </div>
 
-        <div id="Share-Button" style="">
-            <a href="Share">Share</a>
+        <div id="Share-Button">
+           <div class="fb-share-button fb_iframe_widget" data-href="http://cmp.interactivated.co.il/McCann/Altman/2013/Seker/6.html" data-width="100" data-type="button"></div>
         </div>
-        <div class="takanon-button btn-click"></div>
+        <div onClick="getTakanon();" class="takanon-button btn-click"></div>
 </script>
 <!-- END OF: STARTING PAGE TEMPLATE -->
 
@@ -114,40 +121,63 @@ $currentJson = file_get_contents('data.json');
     <div id="Main-Answers-Meter">
         <div id="Meter-Arrow"></div>
     </div>
-    <div class="takanon-button btn-click"></div>
+    <div onClick="getTakanon();" class="takanon-button btn-click"></div>
 </script>
 <!-- END OF: Question Template -->
 
 
 <script id="Contact-Final-Page-HBS" type="text/x-handlebars-template">
     <div id="Contact-Final-Container">
-        <form>
-            <textarea></textarea>
-            <input class="contact-form-input" type="text" name="name" />
-            <input class="contact-form-input" type="text" name="phone" />
-            <input class="contact-form-input" type="text" name="email" />
-            <input type="checkbox" name="agree" />
+        <form style="margin-right:50px">
+            <textarea style="margin-bottom:10px" onfocus="if(this.value == 'טיפ') { this.value = ''; }" cols="60" val="" rows="3"></textarea>
+            <input name="Firstname" id="name" onfocus="if(this.value == 'שם מלא') { this.value = ''; }" value="שם מלא" type="text" placeholder="שם מלא">
+            <input name="Phone" id="phone" onfocus="if(this.value == 'טלפון') { this.value = ''; }" value="טלפון" type="text" placeholder="טלפון">
+            <input name="Email" id="email" onfocus="if(this.value == 'דוא״ל') { this.value = ''; }" value='דוא״ל' type="text" placeholder='דוא"ל'>
+            <input type="hidden" value="<?= $_GET['Media'] ?>" name="Media" class="userInfoMedia" />
+            <input type="hidden" value="<?= $_GET['Channel'] ?>" name="Channel" class="userInfoChannel" />
+            <input type="hidden" value="<?= $_GET['Prod'] ?>" name="Prod" class="userInfoProd" />
+            <input type="hidden" value="<?= $_GET['Erate'] ?>" name="Erate" class="userInfoErate" />
+            <input type="hidden" value="<?= $_GET['Size'] ?>" name="Size" class="userInfoSize" />
         </form>
         <div onClick="contactForm()" id="Contact-Final-Submit"></div> 
     </div>
     <div id="Contact-Final-Footer">
-        <a href="#coupon" class="footer-btn coupon-button" />
-        <a href="#about" class="footer-btn about-button"  />
-        <a href="#result" class="footer-btn result-button" />
+        <a href="#coupon" class="footer-btn coupon-button" onClick="getCoupon();" />
+        <a href="#about" class="footer-btn about-button" onClick="getAboutPage();" />
+        <a href="#result" class="footer-btn result-button" onClick="getResultPage();" />
     </div>
-    <div class="takanon-button btn-click"></div>
+    <div onClick="getTakanon();" class="takanon-button btn-click"></div>
 </script>
 
 <script id="Result-Page-HBS" type="text/x-handlebars-template">
+    <div id="Result-Page-Header"></div>
     <div id="Result-Main-Container"></div>    
     <div id="Woman-Left"></div>
     <div id="Footer-Start" style="margin-right: 50px;margin-top: 510px;position: absolute;">
-        <a class="footer-btn about-button" href="#About"></a>
-        <a class="footer-btn rest-result-button" href="#rest"></a>
-        <a class="footer-btn coupon-button" href="#Coupon"></a>
+        <a class="footer-btn about-button" onClick="getAboutPage();" href="#About"></a>
+        <a class="footer-btn rest-result-button" href="#rest" onClick="getRestResult()"></a>
+        <a class="footer-btn coupon-button" href="#Coupon" onClick="getCoupon();"></a>
     </div>
-    <div class="takanon-button btn-click"></div>
+    <div onClick="getTakanon();" class="takanon-button btn-click"></div>
 </script>
+
+<!-- Rest-Result-Page-HBS : TEMPLATE - ALL THE OTHER WOMAN RESULT -->
+<script id="Rest-Result-Page-HBS" type="text/x-handlebars-template">
+    <div id="Main-Total-Result">
+        <span class="meter-arrow-all"></span>
+        <span class="meter-arrow-single"></span>
+        
+    </div>
+</script>
+
+
+<!-- THANKS YOU FOR COMPLETE THE FORM -->
+<script id="Thank-You-Page-HBS" type="text/x-handlebars-template">
+    <div id="Thank-You-Header"></div>
+    <div id="Thank-You-Confirmation"></div>
+    <div id="Thank-You-Show-Result" onClick="getResultPage();"></div>
+</script>
+
 
 <script type="text/javascript">
     Handlebars.registerHelper('list', function(items, options) {
@@ -175,33 +205,44 @@ $currentJson = file_get_contents('data.json');
 
     });
 
+var getAboutPage = function getAboutPage(){
 
-$(".about-button").fancybox({
-  padding: 0,
-  margin: 0,
-  hideOnContentClick: true,
-  titleShow: false,
-  showNavArrows: false,
-  afterLoad: function(){ _gaq.push(['_trackEvent', 'Femina_ Survey', 'about_femina_probiotics']); }
-});
+    $(".about-button").fancybox({
+      padding: 0,
+      margin: 0,
+      hideOnContentClick: true,
+      titleShow: false,
+      showNavArrows: false,
+      afterLoad: function(){ _gaq.push(['_trackEvent', 'Femina_ Survey', 'about_femina_probiotics']); }
+    });   
+}
 
-$(".coupon-button").fancybox({
-    scrolling: "no",
-    padding: 0,
-    margin: 0,
-    hideOnContentClick: true,
-    titleShow: false,
-    showNavArrows: false,
-    afterLoad: function(){ _gaq.push(['_trackEvent', 'Femina_ Survey', 'coupon']) }
-});
 
-$(".takanon-button").on("click",function(e){
-    console.log('takanon;;;;');
-    e.preventDefault();
+var getCoupon = function getCoupon(){
+    $(".coupon-button").fancybox({
+        scrolling: "no",
+        padding: 0,
+        margin: 0,
+        hideOnContentClick: true,
+        titleShow: false,
+        showNavArrows: false,
+        afterLoad: function(){ _gaq.push(['_trackEvent', 'Femina_ Survey', 'coupon']) }
+    });
+}
+
+var getTakanon = function getTakanon(){
     _gaq.push(['_trackEvent', 'Femina_ Survey', 'takanon']);
     window.open("./src/takanon.pdf");
-});
+}
 
+var getRestResult = function getRestResult (){
+    
+    var source   = $("#Rest-Result-Page-HBS").html();
+    var template = Handlebars.compile(source);
+    var context  = {};
+    var html    = template(context);
+    $('#Question-Page').html(html);
+}
 </script>
 
 </body>
