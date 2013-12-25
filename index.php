@@ -120,7 +120,7 @@ $currentJson = file_get_contents('data.json');
  <script id="Starting-Page-HBS" type="text/x-handlebars-template">
         <div id="Woman-Left" style="background: url('src/img/woman+product.png'); width:288px; height:494px; margin-right: 719px;margin-top: 57px;position: absolute;"></div>
 
-        <div id="Ready-Button" style="background: url('src/img/ready_button.png'); width:287px; height:79px; position: absolute;margin-right: 280px;margin-top: 325px;cursor:pointer;"></div>
+        <div id="Ready-Button" onClick="generateQuestionPage(1);" style="background: url('src/img/ready_button.png'); width:287px; height:79px; position: absolute;margin-right: 280px;margin-top: 325px;cursor:pointer;"></div>
 
         <div id="Main-Text" style="background:url('src/img/main_txt.png'); width:564px; height:278px; position: absolute;margin-top: 35px;margin-right: 140px"></div>
      
@@ -165,7 +165,6 @@ $currentJson = file_get_contents('data.json');
         $('#Starting-Page').html(html);
         $('#Ready-Button').click(function(e){
             e.preventDefault();
-            console.log('Ready');
             generateQuestionPage(1);
         });
 
@@ -175,7 +174,7 @@ $currentJson = file_get_contents('data.json');
         num = parseInt(num, 10);
         var source   = $("#Question-Page-HBS").html();
         var template = Handlebars.compile(source);
-        
+        console.log('generating page %s', num);
         switch(num)
         {
             case 1:
@@ -184,13 +183,35 @@ $currentJson = file_get_contents('data.json');
                 var html    = template(context);
                 break;
             case 2:
-                $('#Starting-Page').hide();
-                var context = {question: 'this is question2', question_number: '1', answers: [ {answer:'answer 1', number: 1, page: 1}, {answer:'answer 2', number: 2, page: 1} ,  {answer:'answer 3', number: 3, page: 1} ]};
+                var context = {question: 'this is question 2222', question_number: '1', answers: [ {answer:'answer 1', number: 1, page: 2}, {answer:'answer 2', number: 2, page: 2} ,  {answer:'answer 3', number: 3, page: 2} ]};
                 var html    = template(context);
                 break;
             case 3:
-                $('#Starting-Page').hide();
-                var context = {question: 'this is question3', question_number: '1', answers: [ {answer:'answer 1', number: 1, page: 1}, {answer:'answer 2', number: 2, page: 1} ,  {answer:'answer 3', number: 3, page: 1} ]};
+                var context = {question: 'this is question 3', question_number: '1', answers: [ {answer:'answer 1', number: 1, page: 3}, {answer:'answer 2', number: 2, page: 3} ,  {answer:'answer 3', number: 3, page: 3} ]};
+                var html    = template(context);
+                break;
+            case 4:
+                var context = {question: 'this is question 4', question_number: '1', answers: [ {answer:'answer 1', number: 1, page: 4}, {answer:'answer 2', number: 2, page: 4} ,  {answer:'answer 3', number: 3, page: 4} ]};
+                var html    = template(context);
+                break;
+            case 5:
+                var context = {question: 'this is question 5', question_number: '1', answers: [ {answer:'answer 1', number: 1, page: 5}, {answer:'answer 2', number: 2, page: 5} ,  {answer:'answer 3', number: 3, page: 5} ]};
+                var html    = template(context);
+                break;
+            case 6:
+                var context = {question: 'this is question 6', question_number: '1', answers: [ {answer:'answer 1', number: 1, page:6}, {answer:'answer 2', number: 2, page: 6} ,  {answer:'answer 3', number: 3, page: 6} ]};
+                var html    = template(context);
+                break;
+            case 7:
+                var context = {question: 'this is question 7', question_number: '1', answers: [ {answer:'answer 1', number: 1, page: 7}, {answer:'answer 2', number: 2, page: 7} ,  {answer:'answer 3', number: 3, page: 7} ]};
+                var html    = template(context);
+                break;
+            case 8:
+                var context = {question: 'this is question 8', question_number: '1', answers: [ {answer:'answer 1', number: 1, page: 8}, {answer:'answer 2', number: 2, page: 8} ,  {answer:'answer 3', number: 3, page: 8} ]};
+                var html    = template(context);
+                break;
+            case 9:
+                var context = {question: 'this is question 9', question_number: '1', answers: [ {answer:'answer 1', number: 1, page: 9}, {answer:'answer 2', number: 2, page: 9} ,  {answer:'answer 3', number: 3, page: 9} ]};
                 var html    = template(context);
                 break;
             default:
@@ -206,7 +227,8 @@ $currentJson = file_get_contents('data.json');
         console.log('addAnswerEvent');
         
         console.log('page: %s, answer: %s', page, ans);
-        page = page +1;
+        page = page+1;
+        console.log(page);
         generateQuestionPage(page);
     }
 </script>
