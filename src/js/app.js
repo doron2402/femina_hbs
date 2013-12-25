@@ -115,7 +115,7 @@
 
 
 var addAnswerEvent = function addAnswerEvent(page, ans){
-
+    var AnswerScore = [0,1,10,30];
     if (Seker.Answer[page] === undefined){
 
         console.log('page: %s, answer: %s', page, ans);
@@ -133,12 +133,13 @@ var addAnswerEvent = function addAnswerEvent(page, ans){
             },1000);
         }
         else{
+            ans = 1;
             $("#Meter-Arrow").animate({
                 'margin-top': '213px'
             },500);
         }
         //Save answer 
-        Seker.result = ans;
+        Seker.result = AnswerScore[ans];
         //Move to next page
         setTimeout(function() {
             page = page+1;
@@ -236,17 +237,10 @@ var contactForm = function contactForm(){
 
 
 var getResultPage = function getResultPage(){
-
-    var TotalValue = 0;
-    $.each(Seker.Answer, function( index, value ) {
-        if (!isNaN(value))
-            TotalValue = TotalValue + value;
-    });
-
    
-    if(TotalValue <= 20 )       
+    if(Seker.Result <= 20 )       
       var Json =  {result_text: " את שומרת על עצמך ועל בריאותך ופרוביוטיק פמינה זה בדיוק בשבילך. אבל אל תשכחי לפעמים לשחרר ולאפשר לעצמך את מה שמגיע לך, פרגני לעצמך ותמצאי לעצמך את האיזון שלך. סמכי עלינו, זה אפשרי. אז שמרי על קשר ובהצלחה!", result_header: 'מחוברת אבל עם גבולות'}; 
-    else if ( TotalValue >= 110)
+    else if ( Seker.result >= 110)
         var Json =  {result_text: "מחוברת מחוברת מחוברת! את יודעת ליהנות מהחיים....את פשוט לא מכירה שום דרך אחרת! תמשיכי כך, אבל........... אל תשכחי לשמור על עצמך ותזכרי תמיד לשמור על הבריאות האינטימית שלך כדי שתוכלי להמשיך לכבוש את העולם ובהצלחה!", result_header: 'מחוברת מדי!'}; 
     else
         var Json =  {result_text: " לגמרי מחוברת אבל גם לא מנותקת מגבולות ההיגיון. את משוחררת, עושה חיים ולא מוותרת על הצד הכיפי של החיים. סחתיין עליך! תמשיכי לשמור על הבריאות האינטימית שלך כדי שתוכלי להמשיך להינות מהחיים  שמרי על קשר ובהצלחה!", result_header: 'מחוברת כמו שצריך'}; 
